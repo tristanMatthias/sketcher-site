@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+main.home {
+  display: grid;
+  grid-template-rows: 8rem 1fr 8rem;
+  align-items: center;
+
+  .empty {
+    text-align: center;
+    font-family: $ff-hand;
+    color: $color-alt;
+    font-size: 3.6rem;
+    small {
+      display: block;
+    }
+  }
+}

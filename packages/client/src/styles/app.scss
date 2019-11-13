@@ -1,0 +1,15 @@
+@import 'reset-css';
+@import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
+
+html {
+  font-family: "Space Grotesk";
+  font-size: 10px;
+}
+
+html, body, #app, main {
+  height: 100vh;
+}
+
+body {
+  font-size: 2.4rem;
+}
