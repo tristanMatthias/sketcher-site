@@ -1,0 +1,12 @@
+{
+  "name": "sketch-site-extractor",
+  "version": "0.0.0",
+  "types": "index.d.ts",
+  "main": "index.js",
+  "bin": {
+    "extract-images": "./parse.py"
+  },
+  "dependencies": {
+    "execa": "^3.2.0"
+  }
+}

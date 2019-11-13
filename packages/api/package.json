@@ -1,0 +1,22 @@
+{
+  "name": "sketch-site-api",
+  "version": "0.0.0",
+  "description": "API for sketch-site",
+  "author": "Tristan Matthias <hello@tristanmatthias.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "sqlite3": "^4.1.0"
+  },
+  "dependencies": {
+    "@types/graphql-type-json": "^0.3.0",
+    "@types/graphql-upload": "^8.0.3",
+    "@types/tmp": "^0.1.0",
+    "graphql": "^14.4.2",
+    "graphql-type-json": "^0.3.0",
+    "graphql-upload": "^8.0.7",
+    "sketch-site-extractor": "^0.0.0",
+    "tmp": "^0.1.0",
+    "tmp-promise": "^2.0.2",
+    "type-graphql": "^0.17.4"
+  }
+}

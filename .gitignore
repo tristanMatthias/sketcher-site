@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+packages/extractor/data
+node_modules
+*.log
+dist/

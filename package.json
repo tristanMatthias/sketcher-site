@@ -1,0 +1,14 @@
+{
+  "name": "sketch-site",
+  "version": "0.0.1",
+  "description": "Turn your sketches into websites and apps",
+  "private": true,
+  "author": "Tristan Matthias <hello@tristanmatthias.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/"
+  ],
+  "devDependencies": {
+    "lerna": "^3.18.4"
+  }
+}
