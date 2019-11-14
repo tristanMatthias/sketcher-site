@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.canvas {
+  position: relative;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+
+  .empty {
+    text-align: center;
+    font-family: $ff-hand;
+    color: $color-soft;
+    font-size: 3.6rem;
+    animation: fade-up 0.35s forwards;
+
+    small {
+      display: block;
+    }
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

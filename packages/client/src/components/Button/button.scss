@@ -1,0 +1,80 @@
+@import '../../styles/variables.scss';
+
+button {
+  display: inline-block;
+  $bw: 3px;
+  position: relative;
+  border-radius: $bw;
+  border: $bw solid $color-main;
+  background: white;
+  min-height: 4rem;
+  min-width: 4rem;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.8rem;
+  font-family: $ff-main;
+
+  span, svg {
+    vertical-align: middle;
+  }
+  span {
+    margin: 0 2rem 0 1rem;
+  }
+
+  svg:not(:only-child) {
+    margin-left: 0.7rem;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: -1 * $bw;
+    right: -1 * $bw;
+    content: '';
+    border: $bw solid $color-main;
+    border-top: -1 * $bw;
+    height: 0.5rem;
+    transform: translateY(100%);
+    border-bottom-left-radius: $bw;
+    border-bottom-right-radius: $bw;
+    background: $color-soft;
+    z-index: -2;
+  }
+
+  &:active {
+    background: $color-soft;
+  }
+
+  & + button {
+    margin-left: 1rem;
+  }
+
+  &[type="submit"] {
+    &, &:after {
+      background-color: $color-alt;
+      // color: white;
+    }
+    &:after, &:active {
+      background-color: $color-alt-dark;
+    }
+  }
+
+  &:active {
+    transform: translateY(0.8rem);
+    &:after {
+      border-top: 0;
+      transform: none;
+      background: none;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    color: currentColor;
+    &, &:after {
+      background-color: $color-soft;
+    }
+  }
+}

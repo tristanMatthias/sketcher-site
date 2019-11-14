@@ -1,0 +1,12 @@
+query($extract: ExtractInput!) {
+  extract(extract: $extract) {
+    component
+    center
+    box {
+      x
+      y
+      w
+      h
+    }
+  }
+}
