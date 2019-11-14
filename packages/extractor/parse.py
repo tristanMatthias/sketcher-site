@@ -25,6 +25,13 @@ ns = parser.parse_args()
 
 extractor = ImageExtract(ns.input[0])
 extracted = extractor.extract()
+
+# Handle no determinable shapes
+if (extracted is None or len(extracted) == 0):
+    print('[]')
+    exit()
+
+
 images = extracted[:, 0]
 
 
@@ -43,9 +50,7 @@ model = tf.keras.models.load_model(MODEL_PATH)
 predictions = list(map(lambda i: model.predict_classes(i)[0], images))
 predictions = list(map(lambda p: CLASS_NAMES[p], predictions))
 
-
 data = []
-
 
 for i, e in enumerate(extracted):
     img, rec, bbox = e

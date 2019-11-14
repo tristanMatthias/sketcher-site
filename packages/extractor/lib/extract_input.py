@@ -3,6 +3,8 @@ from classes.ImageExtract import ImageExtract
 from classes.Saver import Saver
 import matplotlib.pyplot as plt
 from settings import INPUT_TYPES
+import numpy as np
+import pathlib
 
 dir_path = os.path.dirname(os.path.abspath(os.path.join(
     os.path.realpath(__file__), '../')))
@@ -14,14 +16,27 @@ def extract(types=INPUT_TYPES):
     images = {}
 
     for type in types:
-        print('Extracting {}'.format(type))
-        filename = "{}/{}".format(
-            dir_path,
-            'input/{}/{}.svg'.format(type, type)
-        )
-        ie = ImageExtract(filename)
-        images[type] = ie.extract()[:, 0]
-        canvases.append(ie.canvas)
+        DIR = pathlib.Path("{}/{}".format(dir_path, 'input/{}'.format(type)))
+        files = np.array(
+            [item.name for item in DIR.glob('*') if item.name != ".DS_Store"])
+        print('Extracting {} ({} files)'.format(type, len(files)))
+
+        images[type] = np.array([])
+
+        for f in files:
+            filename = "{}/{}".format(dir_path, 'input/{}/{}'.format(type, f))
+            ie = ImageExtract(filename)
+            extracted = ie.extract()
+
+            if (extracted is not None):
+                print("\tFound {} shapes for {}".format(
+                    len(extracted), filename))
+                images[type] = np.concatenate((images[type], extracted[:, 0]))
+                canvases.append(ie.canvas)
+            else:
+                print("\tNo shapes found for {}".format(filename))
+
+        print("Total images for {}: {}".format(type, len(images[type])))
 
     for type, imgs in images.items():
         train_size = int(len(imgs) * 0.8)
