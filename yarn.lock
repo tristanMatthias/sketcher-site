@@ -1165,7 +1165,7 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@tmatthias/boilerplate-api@^0.0.1-alpha.2":
+"@tmatthias/boilerplate-api@^0.0.1-alpha.3":
   version "0.0.1-alpha.3"
   resolved "https://registry.yarnpkg.com/@tmatthias/boilerplate-api/-/boilerplate-api-0.0.1-alpha.3.tgz#504f662fba569c06ad0b5b224a3b23873ca947d7"
   integrity sha512-YcRgUCs2ziERCQ8OzYxA7+RoJf0Z+vlOkfMGqOb9JnjxtObhYDkh7Ir2GpXVJ+R2Z1hnw+WH+kqBKqCBVR09eA==
@@ -8831,11 +8831,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
-
-reset-css@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/reset-css/-/reset-css-5.0.1.tgz#1ced0604fdb6836567e40d82de3537afaf3bb4c8"
-  integrity sha512-VyuJdNFfp5x/W6e5wauJM59C02Vs0P22sxzZGhQMPaqu/NGTeFxlBFOOw3eq9vQd19gIDdZp7zi89ylyKOJ33Q==
 
 resize-img@^1.1.0:
   version "1.1.2"
