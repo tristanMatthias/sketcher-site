@@ -67,7 +67,7 @@ const config: Configuration = {
     ]),
     new replacePlugin({
       values: {
-        '{{API_URL}}': isProd ? 'https://api.sketchsite.com' : 'http://localhost:4000',
+        '{{API_HOST}}': isProd ? 'https://api.sketch.site' : 'http://localhost:4000',
         '{{IS_PROD}}': isProd
       }
     })
