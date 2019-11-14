@@ -6,6 +6,7 @@
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
   "scripts": {
+    "preinstall": "if [[ $NETLIFY == 'true' ]]; then echo '3.7.2' > runtime.txt; fi",
     "build": "lerna run build",
     "start": "node ./packages/api/dist"
   },
