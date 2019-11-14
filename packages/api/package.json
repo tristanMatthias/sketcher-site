@@ -8,7 +8,7 @@
   "main": "./dist/import.js",
   "scripts": {
     "types": "node dist/lib/generateTypes.js gqlg --schemaFilePath dist/schema.gql",
-    "build": "tsc -p ./"
+    "build": "tsc -p ./; yarn types"
   },
   "devDependencies": {
     "sqlite3": "^4.1.0"
