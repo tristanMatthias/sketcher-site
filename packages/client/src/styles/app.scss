@@ -11,8 +11,16 @@ html {
   font-size: 10px;
 }
 
-html, body, #app, main {
-  height: 100vh;
+html, body, #app {
+  min-height: 100vh;
+  overflow: hidden;
+}
+main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
