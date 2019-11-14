@@ -1,0 +1,5 @@
+build:
+  # Run this lifecycle during build
+  lifecycle:
+    init:
+      - echo '3.7.2' > runtime.txt
