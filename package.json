@@ -6,7 +6,7 @@
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
   "scripts": {
-    "build": "lerna run build --ignore sketch-site-client",
+    "build": "lerna run build",
     "start": "node ./packages/api/dist"
   },
   "workspaces": [
