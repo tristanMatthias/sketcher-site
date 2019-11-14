@@ -1,25 +1,50 @@
 import { useLazyQuery } from '@apollo/react-hooks';
+import { useEffect, useState } from 'react';
 import { EExtract } from 'sketch-site-api';
 import { createContainer } from 'unstated-next';
 
 import extractQuery from '../gql/queries/extract.gql';
+import { history } from '../router/history';
 import { Picture } from './picture.container';
 
 const useExtract = () => {
   const { picture } = Picture.useContainer();
   const [query, { data, error, loading }] = useLazyQuery<{ extract: EExtract[] }>(extractQuery);
+  const [components, setComponents] = useState<EExtract[]>([]);
 
   const extract = async (pic = picture) => {
     if (!pic) throw new Error('No picture');
-    console.log(pic);
 
     await query({
       variables: { extract: { image: pic } }
     });
   };
 
+  useEffect(() => {
+    if (data) {
+      setComponents(data.extract);
+      const siteString = btoa(`v1,${data.extract.map(c => c.component).join(',')}`);
+      history.push(`/s/${siteString}`);
+    }
+  }, [data]);
+
+  const decodeSiteString = (site: string) => {
+    const decoded = atob(site);
+    const [, ...components] = decoded.split(',');
+    setComponents(components.map(c => ({
+      component: c,
+      center: [0, 0],
+      box: {
+        w: 0,
+        h: 0,
+        x: 0,
+        y: 0
+      }
+    })));
+  };
+
   return {
-    data, error, loading, extract
+    components, error, loading, extract, decodeSiteString
   };
 };
 

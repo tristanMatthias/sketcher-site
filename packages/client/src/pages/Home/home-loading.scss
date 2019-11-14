@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.home-loading {
+  position: fixed;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba($color-main, 0.7);
+  opacity: 0;
+  animation: fade-in 0.3s forwards;
+
+  .card {
+    margin: 2rem;
+    opacity: 0;
+    animation: fade-up 0.3s forwards;
+  }
+}

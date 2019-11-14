@@ -1,5 +1,6 @@
 @import 'reset-css';
 @import url('https://fonts.googleapis.com/css?family=Caveat&display=swap');
+@import './variables.scss';
 
 * {
   box-sizing: border-box;
@@ -18,7 +19,28 @@ html, body, #app, main {
 
 body {
   font-size: 2.4rem;
+  line-height: 1.6em;
 }
+
+
+input {
+  height: 4rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  line-height: 4rem;
+  border: $border-width solid $color-main;
+  border-radius: $border-width;
+  color: $color-main;
+  font-family: $ff-main;
+  font-size: 1.8rem;
+  padding: 0 1rem;
+  display: block;
+
+  button + & {
+    margin-top: 2rem;
+  }
+}
+
 
 
 @keyframes fade-up {
@@ -30,4 +52,9 @@ body {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

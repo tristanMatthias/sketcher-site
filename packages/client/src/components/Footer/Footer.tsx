@@ -11,9 +11,7 @@ import { Icon } from '../Icon/Icon';
 export const Footer = () => {
   const { undo, clear, userActions } = CC.useContainer();
   const { picture } = Picture.useContainer();
-  const { data, extract } = Extract.useContainer();
-
-  console.log(data);
+  const { extract } = Extract.useContainer();
 
 
   return <footer>

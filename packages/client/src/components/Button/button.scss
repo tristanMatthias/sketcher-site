@@ -25,6 +25,9 @@ button {
   svg:not(:only-child) {
     margin-left: 0.7rem;
   }
+  span:only-child {
+    margin: 0 1rem;
+  }
 
   &:after {
     position: absolute;

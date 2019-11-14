@@ -4,8 +4,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  border-bottom: $border-width solid $color-main;
 
   img {
-    height: 3rem;
+    height: 2.5rem;
   }
 }

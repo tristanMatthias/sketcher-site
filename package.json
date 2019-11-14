@@ -5,6 +5,10 @@
   "private": true,
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "lerna run build --ignore sketch-site-client",
+    "start": "node ./packages/api/dist"
+  },
   "workspaces": [
     "packages/"
   ],

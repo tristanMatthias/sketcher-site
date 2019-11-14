@@ -1,6 +1,6 @@
 import './canvas.scss';
 
-import React, { TouchEvent, useEffect, useRef, useState } from 'react';
+import React, { TouchEvent, useEffect, useRef, useState, MouseEvent } from 'react';
 
 import { Canvas as CC } from '../../containers/canvas.container';
 import { Picture } from '../../containers/picture.container';
@@ -14,6 +14,7 @@ export const Canvas = () => {
   const { setPicture } = Picture.useContainer();
   const canvas = useRef<HTMLCanvasElement>(null);
   const windowSize = useResize();
+  const [drawing, setDrawing] = useState(false);
 
 
   useEffect(() => {
@@ -44,8 +45,11 @@ export const Canvas = () => {
     });
   };
 
-  const draw = (e: TouchEvent<HTMLCanvasElement>) => {
+  const drawTouch = (e: TouchEvent<HTMLCanvasElement>) => {
     drawPoint(e.touches[0].clientX, e.touches[0].clientY);
+  };
+  const drawMouse = (e: MouseEvent<HTMLCanvasElement>) => {
+    if (drawing) drawPoint(e.clientX, e.clientY);
   };
 
   const render = () => {
@@ -108,9 +112,18 @@ export const Canvas = () => {
     <canvas
       ref={canvas}
       onTouchStart={pushAction}
-      onMouseDown={pushAction}
-      onTouchMove={draw}
+      onMouseDown={() => {
+        setDrawing(true);
+        pushAction();
+      }}
+      onTouchMove={drawTouch}
+      onDrag={drawMouse}
       onTouchEnd={updatePicture}
+      onMouseUp={() => {
+        setDrawing(false);
+        updatePicture();
+      }}
+      onMouseMove={drawMouse}
     ></canvas>
   </div>;
 };
