@@ -4,4 +4,5 @@ main.home {
   display: grid;
   grid-template-rows: 8rem 1fr 8rem;
   align-items: center;
+  user-select: none;
 }
