@@ -10,7 +10,7 @@
     "start": "node ./packages/api/dist"
   },
   "workspaces": [
-    "packages/"
+    "packages/*"
   ],
   "devDependencies": {
     "lerna": "^3.18.4",
