@@ -4,6 +4,11 @@
   "description": "API for sketch-site",
   "author": "Tristan Matthias <hello@tristanmatthias.com>",
   "license": "MIT",
+  "types": "./dist/schema.d.ts",
+  "main": "./dist/import.js",
+  "scripts": {
+    "types": "node dist/lib/generateTypes.js gqlg --schemaFilePath dist/schema.gql"
+  },
   "devDependencies": {
     "sqlite3": "^4.1.0"
   },
@@ -11,6 +16,7 @@
     "@types/graphql-type-json": "^0.3.0",
     "@types/graphql-upload": "^8.0.3",
     "@types/tmp": "^0.1.0",
+    "gql-generator": "^1.0.12",
     "graphql": "^14.4.2",
     "graphql-type-json": "^0.3.0",
     "graphql-upload": "^8.0.7",

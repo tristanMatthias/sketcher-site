@@ -6,8 +6,10 @@ import { ExtractInput } from '../gql/entities/ExtractEntity';
 
 export const ExtractService = new class {
   async extract(input: ExtractInput) {
+    console.log(input);
+
     const img = await (await input.image).createReadStream();
-    const { path, cleanup } = await file();
+    const { path } = await file();
 
     fs.writeFileSync(path, img);
 
@@ -15,9 +17,10 @@ export const ExtractService = new class {
     img.pipe(fileStream);
 
     const res = await extract(path);
+    console.log(path);
 
 
-    cleanup();
+    // cleanup();
 
     return res;
   }
