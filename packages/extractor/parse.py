@@ -73,11 +73,11 @@ print(json.dumps(data, indent=2, sort_keys=True))
 
 # def draw():
 #     def drawImg(i, img):
-#         plt.subplot(1, 1, i+1)
+#         plt.subplot(1, len(images), i+1)
 #         plt.imshow(img, cmap="gray")
 #         plt.xticks([]), plt.yticks([])
 
-#     [drawImg(i, img) for i, img in enumerate(images)]
+#     [drawImg(i, img[0, :, :, 0]) for i, img in enumerate(images)]
 
 #     plt.show()
 
