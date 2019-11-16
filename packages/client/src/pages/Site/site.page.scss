@@ -2,4 +2,16 @@
 
 main.site {
   padding: 2rem;
+  width: 80%;
+  max-width: 60rem;
+  margin: auto;
+  position: relative;
+
+  * {
+    display: block;
+    margin-bottom: 2rem;
+  }
+  button {
+    margin-bottom: 2.5rem;
+  }
 }

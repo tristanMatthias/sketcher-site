@@ -6,8 +6,10 @@ header {
   justify-content: center;
   height: 100%;
   border-bottom: $border-width solid $color-main;
+  user-select: none;
 
   img {
     height: 2.5rem;
+    user-select: none;
   }
 }

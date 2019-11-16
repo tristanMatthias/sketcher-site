@@ -9,8 +9,9 @@ import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 
 export const Footer = () => {
-  const { undo, clear, userActions } = CC.useContainer();
+  const { undo, clear, userActions, cameraClick } = CC.useContainer();
   const { picture } = Picture.useContainer();
+
   const { extract } = Extract.useContainer();
 
 
@@ -27,7 +28,11 @@ export const Footer = () => {
         </>}
     </div>
 
-    <Button className="camera">
+    <Button
+      className="camera"
+      onClick={cameraClick}
+      circle
+    >
       <Icon type="camera" size="large" />
     </Button>
 

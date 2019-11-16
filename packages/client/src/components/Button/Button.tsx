@@ -1,8 +1,14 @@
 import './button.scss';
+import classnames from 'classnames';
 
 import React from 'react';
 
-export const Button: React.FunctionComponent<JSX.IntrinsicElements['button']> = ({ children, ...props }) => {
-  return <button {...props}>{children}</button>;
+export type ButtonProps = JSX.IntrinsicElements['button'] & {
+  circle?: boolean;
+};
+
+export const Button: React.FunctionComponent<ButtonProps> = ({ children, circle, ...props }) => {
+  const className = classnames(props.className, { circle });
+  return <button {...props} className={className}>{children}</button>;
 };
 

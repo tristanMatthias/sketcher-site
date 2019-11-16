@@ -1,17 +1,18 @@
 import './canvas.scss';
 
-import React, { TouchEvent, useEffect, useRef, useState, MouseEvent } from 'react';
+import React, { MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react';
 
-import { Canvas as CC } from '../../containers/canvas.container';
+import { Canvas as CC, CanvasMode } from '../../containers/canvas.container';
 import { Picture } from '../../containers/picture.container';
 import { useResize } from '../../hooks/resize';
 
 
 export const Canvas = () => {
   const container = useRef<HTMLDivElement>(null);
+  const video = useRef<HTMLVideoElement>(null);
   const [containerBox, setContainerBox] = useState<DOMRect>();
-  const { setUserActions, userActions } = CC.useContainer();
-  const { setPicture } = Picture.useContainer();
+  const { setUserActions, userActions, mode, stream } = CC.useContainer();
+  const { setPicture, captureState, setCaptured } = Picture.useContainer();
   const canvas = useRef<HTMLCanvasElement>(null);
   const windowSize = useResize();
   const [drawing, setDrawing] = useState(false);
@@ -31,9 +32,32 @@ export const Canvas = () => {
   }, [containerBox]);
 
 
-  const pushAction = () => {
-    setUserActions(a => [...a, []]);
-  };
+  useEffect(() => {
+    if (video.current && mode === CanvasMode.camera && stream) {
+      if ('srcObject' in video.current) {
+        video.current.srcObject = stream;
+      } else {
+        // Avoid using this in new browsers, as it is going away.
+        // @ts-ignore
+        video.current.src = URL.createObjectURL(stream);
+      }
+      video.current.width = containerBox!.width;
+      video.current.height = containerBox!.height;
+      video.current.play();
+
+    }
+  }, [video.current, mode, stream]);
+
+
+  useEffect(() => {
+    if (mode == CanvasMode.camera && video.current) {
+      setCaptured();
+      updatePicture();
+    }
+  }, [captureState]);
+
+
+  const pushAction = () => setUserActions(a => [...a, []]);
 
   const drawPoint = (x: number, y: number) => {
     const xi = Math.round(x) - containerBox!.x;
@@ -78,9 +102,13 @@ export const Canvas = () => {
 
   const updatePicture = () => {
     if (!canvas.current) return;
-    if (userActions.length == 0) {
+    if (userActions.length === 0 && mode === CanvasMode.drawing) {
       setPicture(undefined);
       return;
+    }
+    if (mode == CanvasMode.camera && video.current && canvas.current) {
+      const ctx = canvas.current.getContext('2d')!;
+      ctx.drawImage(video.current, 0, 0);
     }
 
     const dataURI = canvas.current.toDataURL('image/jpeg');
@@ -104,27 +132,38 @@ export const Canvas = () => {
 
 
   return <div ref={container} className="canvas">
+    {mode === CanvasMode.drawing
+      ? <>
+        {userActions.length === 0 && <span className="empty">
+          Draw something <small>or</small> Take a photo
+        </span>}
 
-    {userActions.length === 0 && <span className="empty">
-      Draw something <small>or</small> Take a photo
-    </span>}
+        <canvas
+          ref={canvas}
+          onTouchStart={pushAction}
+          onMouseDown={() => {
+            setDrawing(true);
+            pushAction();
+          }}
+          onTouchMove={drawTouch}
+          onDrag={drawMouse}
+          onTouchEnd={updatePicture}
+          onMouseUp={() => {
+            setDrawing(false);
+            updatePicture();
+          }}
+          onMouseMove={drawMouse}
+        ></canvas>
+      </>
+      : <>
+        <canvas ref={canvas} />
+        <span className="empty">
+          Loading camera...
+        </span>
+        <video ref={video} />
+      </>
+    }
 
-    <canvas
-      ref={canvas}
-      onTouchStart={pushAction}
-      onMouseDown={() => {
-        setDrawing(true);
-        pushAction();
-      }}
-      onTouchMove={drawTouch}
-      onDrag={drawMouse}
-      onTouchEnd={updatePicture}
-      onMouseUp={() => {
-        setDrawing(false);
-        updatePicture();
-      }}
-      onMouseMove={drawMouse}
-    ></canvas>
   </div>;
 };
 
