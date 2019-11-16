@@ -28,7 +28,7 @@ export const SitePage: React.FunctionComponent<{ site: string }> = ({
           return <input {...props} />;
         case 'image':
           return <img src={'http://placehold.it/100x100'} {...props} />;
-        case 'circle-image':
+        case 'circle_image':
           return <img src={'http://placehold.it/100x100'} style={{ borderRadius: '50%' }} />;
         case 'button':
           return <Button {...props}><span>Some text</span></Button>;

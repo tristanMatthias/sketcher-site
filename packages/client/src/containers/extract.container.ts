@@ -6,10 +6,14 @@ import { createContainer } from 'unstated-next';
 import extractQuery from '../gql/queries/extract.gql';
 import { history } from '../router/history';
 import { Picture } from './picture.container';
+import { Canvas } from './canvas.container';
 
 const useExtract = () => {
   const { picture } = Picture.useContainer();
-  const [query, { data, error, loading }] = useLazyQuery<{ extract: EExtract[] }>(extractQuery);
+  const { clear } = Canvas.useContainer();
+  const [query, { data, error, loading }] = useLazyQuery<{ extract: EExtract[] }>(extractQuery, {
+    fetchPolicy: 'network-only'
+  });
   const [components, setComponents] = useState<EExtract[]>([]);
 
   const extract = async (pic = picture) => {
@@ -24,6 +28,7 @@ const useExtract = () => {
     if (data) {
       setComponents(data.extract);
       const siteString = btoa(`v1,${data.extract.map(c => c.component).join(',')}`);
+      clear();
       history.push(`/s/${siteString}`);
     }
   }, [data]);
