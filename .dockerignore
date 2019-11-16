@@ -1,0 +1,6 @@
+node_modules
+**/*/node_modules
+pacakges/*/node_modules
+packages/client
+*.h5
+!pacakges/extractor/model.p5

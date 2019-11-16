@@ -9,12 +9,12 @@ from lib.square_image import square_image
 import matplotlib.pyplot as plt
 from settings import IMG_WIDTH, CLASS_NAMES
 import numpy as np
-import tensorflow.python.util.deprecation as deprecation
+# import tensorflow.python.util.deprecation as deprecation
 import json
 
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-deprecation._PRINT_DEPRECATION_WARNINGS = False
+# deprecation._PRINT_DEPRECATION_WARNINGS = False
 
 
 parser = argparse.ArgumentParser(
