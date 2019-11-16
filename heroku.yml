@@ -1,3 +1,6 @@
+setup:
+  command:
+    - yarn build
 build:
   docker:
     web: Dockerfile
