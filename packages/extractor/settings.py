@@ -14,8 +14,17 @@ INPUT_DIR = pathlib.Path(os.path.join(ROOT_DIR, './input'))
 MODEL_PATH = pathlib.Path(os.path.join(ROOT_DIR, 'model.h5'))
 
 
-CLASS_NAMES = np.array(
-    [item.name for item in TRAIN_DIR.glob('*') if item.name != ".DS_Store"])
+# CLASS_NAMES = np.array(
+#     [item.name for item in TRAIN_DIR.glob('*') if item.name != ".DS_Store"])
 
-INPUT_TYPES = np.array(
-    [item.name for item in INPUT_DIR.glob('*') if item.name != ".DS_Store"])
+# INPUT_TYPES = np.array(
+#     [item.name for item in INPUT_DIR.glob('*') if item.name != ".DS_Store"])
+
+
+CLASS_NAMES = [
+    'button',
+    'circle_image',
+    'image',
+    'input',
+    'text'
+]

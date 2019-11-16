@@ -2,7 +2,7 @@ import os
 from classes.ImageExtract import ImageExtract
 from classes.Saver import Saver
 import matplotlib.pyplot as plt
-from settings import INPUT_TYPES
+from settings import CLASS_NAMES
 import numpy as np
 import pathlib
 
@@ -11,7 +11,7 @@ dir_path = os.path.dirname(os.path.abspath(os.path.join(
 s = Saver()
 
 
-def extract(types=INPUT_TYPES):
+def extract(types=CLASS_NAMES):
     canvases = []
     images = {}
 
