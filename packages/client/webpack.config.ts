@@ -64,7 +64,7 @@ const config: Configuration = {
     new Copy([
       // { from: './src/images/social', to: 'social' },
       // { from: './src/images/', to: 'images' },
-      // { from: './_redirects' }
+      { from: './_redirects' }
     ]),
     new replacePlugin({
       values: {
