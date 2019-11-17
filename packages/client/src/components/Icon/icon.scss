@@ -14,12 +14,12 @@
     vertical-align: middle;
   }
 
-  path {
+  path, polygon {
     stroke: currentColor;
     stroke-width: 0.15rem;
     fill: none;
   }
-  path.no-stroke {
+  path.no-stroke, polygon.no-stroke {
     stroke: none;
     fill: currentColor;
   }

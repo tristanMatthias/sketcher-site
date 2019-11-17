@@ -1,5 +1,7 @@
+@import '../../styles/variables.scss';
+
 .card {
-  background: white;
-  border-radius: 0.4rem;
+  background: $color-white;
+  border-radius: $border-radius;
   padding: 2rem;
 }

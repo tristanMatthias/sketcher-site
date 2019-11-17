@@ -1,0 +1,29 @@
+.modal {
+  aside.help {
+    main {
+      max-width: 60rem;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 0;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 0 2rem;
+      align-items: center;
+      text-align: center;
+
+      div div {
+        margin-top: -3rem;
+        font-size: 1.8rem;
+        white-space: nowrap;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

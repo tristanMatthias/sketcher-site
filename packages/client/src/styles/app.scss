@@ -32,13 +32,21 @@ body {
 }
 
 
+
+h4 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+
+
 input {
   height: 4rem;
   width: 100%;
   margin-bottom: 1rem;
   line-height: 4rem;
   border: $border-width solid $color-main;
-  border-radius: $border-width;
+  border-radius: $border-radius;
   color: $color-main;
   font-family: $ff-main;
   font-size: 1.8rem;

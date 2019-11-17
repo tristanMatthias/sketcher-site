@@ -1,15 +1,21 @@
 @import '../../styles/variables';
 
-header {
+header.page-header {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   height: 100%;
   border-bottom: $border-width solid $color-main;
   user-select: none;
+  padding: 0 1rem;
 
   img {
     height: 2.5rem;
     user-select: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }

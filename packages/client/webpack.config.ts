@@ -37,7 +37,11 @@ const config: Configuration = {
         test: /\/icons\/.*\.svg$/,
         loader: 'svg-react-loader'
       },
-      { test: /\/images\/.*\.svg|png/, loader: 'url-loader' },
+      {
+        test: /\/images\/.*\.svg|png/, loader: 'url-loader', options: {
+          limit: false
+        }
+      },
       {
         test: /font\/.*\.(svg|eot|ttf|woff|woff2)/, loader: 'url-loader', options: {
           limit: false,

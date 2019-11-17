@@ -4,9 +4,9 @@ button {
   display: inline-block;
   $bw: 3px;
   position: relative;
-  border-radius: $bw;
+  border-radius: $border-radius;
   border: $bw solid $color-main;
-  background: white;
+  background: $color-white;
   min-height: 4rem;
   min-width: 4rem;
   padding: 0;
