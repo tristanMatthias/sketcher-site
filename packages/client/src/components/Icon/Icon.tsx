@@ -17,7 +17,7 @@ export interface IconProps extends PropsWithRef<any> {
 export const Icon: React.FunctionComponent<IconProps> = ({
   type: icon,
   color,
-  size,
+  size = 'medium',
   ...props
 }) => {
   const sizeClass = size ? size : null;

@@ -26,5 +26,6 @@ CLASS_NAMES = [
     'circle_image',
     'image',
     'input',
-    'text'
+    'text',
+    'select'
 ]

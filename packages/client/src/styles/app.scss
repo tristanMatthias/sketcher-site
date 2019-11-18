@@ -34,13 +34,14 @@ body {
 
 
 h4 {
+  color: $color-mid;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 1.8rem;
 }
 
 
-input {
+input, select {
   height: 4rem;
   width: 100%;
   margin-bottom: 1rem;
@@ -52,6 +53,7 @@ input {
   font-size: 1.8rem;
   padding: 0 1rem;
   display: block;
+  background: $color-white;
 
   button + & {
     margin-top: 2rem;

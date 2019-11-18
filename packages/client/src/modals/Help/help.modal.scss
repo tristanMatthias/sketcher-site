@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .modal {
   aside.help {
     main {
@@ -9,16 +11,23 @@
     }
 
     .examples {
+      --cols: 3;
+      @media (min-width: 800px) { --cols: 4; }
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(var(--cols), 1fr);
       grid-gap: 0 2rem;
       align-items: center;
       text-align: center;
 
+      div {
+        overflow: hidden;
+      }
       div div {
         margin-top: -3rem;
         font-size: 1.8rem;
         white-space: nowrap;
+        text-overflow: ellipsis;
+        color: $color-mid;
       }
 
       img {

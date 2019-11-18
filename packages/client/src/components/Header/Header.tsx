@@ -13,7 +13,7 @@ export const Header = () => {
   return <header className="page-header">
     <img src={logo} alt="SketchSite" />
     <Button onClick={() => setHelpModal(!helpModal)}>
-      <Icon type="help" size="medium" />
+      <Icon type="help" />
     </Button>
     {helpModal && <HelpModal onClose={() => setHelpModal(false)} />}
   </header>;

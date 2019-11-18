@@ -9,15 +9,17 @@ import exampleImage from '../../images/help/examples/image.svg';
 import exampleCircleImage from '../../images/help/examples/circle-image.svg';
 import exampleText from '../../images/help/examples/text.svg';
 import exampleInput from '../../images/help/examples/input.svg';
+import exampleSelect from '../../images/help/examples/select.svg';
 
 
 export const HelpModal: React.FunctionComponent<Partial<ModalProps>> = props => {
   const examples = [
     [exampleButton, 'Button'],
     [exampleImage, 'Image'],
-    [exampleCircleImage, 'Circle Image'],
+    [exampleCircleImage, 'Round Image'],
     [exampleText, 'Text'],
-    [exampleInput, 'Input']
+    [exampleInput, 'Input'],
+    [exampleSelect, 'Select']
   ];
   return <Modal title="Help" {...props} className="help">
     <h2>What can I draw?</h2>

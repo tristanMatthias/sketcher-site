@@ -1,15 +1,17 @@
+import arrowDown from '../../icons/arrow-down.svg';
 import camera from '../../icons/camera.svg';
 import check from '../../icons/check.svg';
+import close from '../../icons/close.svg';
+import help from '../../icons/help.svg';
 import remove from '../../icons/remove.svg';
 import undo from '../../icons/undo.svg';
-import help from '../../icons/help.svg';
-import close from '../../icons/close.svg';
 
 export const icons = {
+  arrowDown,
   camera,
   check,
-  remove,
-  undo,
+  close,
   help,
-  close
+  remove,
+  undo
 };

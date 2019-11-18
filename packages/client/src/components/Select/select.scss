@@ -1,0 +1,11 @@
+.select {
+  position: relative;
+  svg {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  select {
+    -webkit-appearance: none;
+  }
+}

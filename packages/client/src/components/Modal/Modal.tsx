@@ -32,7 +32,7 @@ export class Modal extends Component<ModalProps> {
       <header>
         <h4>{this.props.title}</h4>
         <div className="close" onClick={this.props.onClose}>
-          <Icon type="close" size="medium" />
+          <Icon type="close" />
         </div>
       </header>
 
