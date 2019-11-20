@@ -1,7 +1,8 @@
 import cv2
+from settings import IMG_WIDTH
 
 
-def square_image(img, size):
+def square_image(img, size=IMG_WIDTH):
     # Resize image to standard size
     height, width = img.shape[:2]
     if (height > width):

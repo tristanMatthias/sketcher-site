@@ -4,12 +4,17 @@ import numpy as np
 from cairosvg import svg2png
 from PIL import Image
 
+import os
+
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
+
 
 class ImageExtract():
 
-    def __init__(self, filename: str, threshold=70):
+    def __init__(self, filename=None, threshold=70):
         self.threshold = threshold
-        self.update(filename)
+        if (filename):
+            self.update(filename)
 
     def update(self, filename: str):
         if (str.endswith(filename, '.svg')):
@@ -25,6 +30,10 @@ class ImageExtract():
             img = self.blur
 
         extracted = None
+        if (isinstance(img, str)):
+            img = cv2.imread(filename=img)
+            img = cv2.cvtColor(src=img, code=cv2.COLOR_BGR2GRAY)
+            self.image = img
 
         # Convert image to binary
         (t, binary) = cv2.threshold(
@@ -34,7 +43,7 @@ class ImageExtract():
             type=cv2.THRESH_BINARY)
 
         # Get shapes and hierarchy
-        (contours, hierarchy) = cv2.findContours(
+        contours, hierarchy = cv2.findContours(
             image=binary,
             mode=cv2.RETR_TREE,
             method=cv2.CHAIN_APPROX_NONE)
@@ -72,13 +81,14 @@ class ImageExtract():
                 #     (self.__extract_rect(binary, rec), c, rec)
                 # ] + extracted
 
-                cv2.drawContours(
-                    self.canvas,
-                    [box],
-                    0,
-                    (0, 255, 0),
-                    thickness=10
-                )
+                if hasattr(self, 'canvas'):
+                    cv2.drawContours(
+                        self.canvas,
+                        [box],
+                        0,
+                        (0, 255, 0),
+                        thickness=10
+                    )
 
         return extracted
 

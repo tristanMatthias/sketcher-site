@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "start": "forever start ./packages/api/dist"
+    "start": "lerna run start"
   },
   "workspaces": [
     "packages/*"
@@ -17,6 +17,6 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "forever": "^1.0.0"
+    "pm2": "^4.1.2"
   }
 }

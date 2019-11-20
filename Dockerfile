@@ -21,25 +21,17 @@ COPY ./packages/extractor/package.json /app/packages/extractor/package.json
 
 RUN yarn --build-from-source
 RUN yarn lerna bootstrap; yarn lerna link
-
-
-RUN echo "# Google IPv4 nameservers nameserver 8.8.8.8 \
-  nameserver 8.8.4.4" >> /etc/resolv.conf
-RUN mkdir -p /etc/dhcp/
-RUN echo "prepend domain-name-servers 8.8.8.8, 8.8.4.4;" > /etc/dhcp/dhclient.conf
-RUN cat /etc/resolv.conf
-# RUN apt-get install libgtk2.1
+RUN pip3 install opencv-python imutils cairosvg matplotlib flask
 RUN apt-get install -y libcairo2
-RUN pip3 install opencv-python imutils cairosvg matplotlib
-
+RUN yarn global add pm2
 
 # -------------------------------------------------------------------- Copy dist
+COPY ./pm2.config.js /app/pm2.config.js
 COPY ./packages/extractor /app/packages/extractor
 COPY ./packages/api/dist /app/packages/api/dist
 COPY ./packages/api/.env ./.env
 
-
 # ---------------------------------------------------------------------- Running
 EXPOSE 4000
 EXPOSE 443
-CMD [ "node", "packages/api/dist"]
+CMD ["pm2-runtime", "pm2.config.js"]

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { file } from 'tmp-promise';
-import extract from 'sketch-site-extractor';
+import fetch from 'node-fetch';
 
 import { ExtractInput } from '../gql/entities/ExtractEntity';
 
@@ -15,11 +15,19 @@ export const ExtractService = new class {
     const fileStream = fs.createWriteStream(path);
     img.pipe(fileStream);
 
-    const res = await extract(path);
 
+    const res = await fetch('http://localhost:8080/parse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        file: path
+      })
+    });
 
     cleanup();
 
-    return res;
+    return await res.json();
   }
 }();

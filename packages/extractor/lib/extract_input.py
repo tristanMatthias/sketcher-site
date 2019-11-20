@@ -3,8 +3,12 @@ from classes.ImageExtract import ImageExtract
 from classes.Saver import Saver
 import matplotlib.pyplot as plt
 from settings import CLASS_NAMES
+from lib.square_image import square_image
+from settings import IMG_WIDTH, CLASS_NAMES
 import numpy as np
 import pathlib
+import matplotlib.pyplot as plt
+import cv2
 
 dir_path = os.path.dirname(os.path.abspath(os.path.join(
     os.path.realpath(__file__), '../')))
@@ -55,3 +59,24 @@ def extract(types=CLASS_NAMES):
         [drawImg(i, img) for i, img in enumerate(images)]
 
         plt.show()
+
+
+def extractForYolo(img: str, classification: str):
+    if (classification not in CLASS_NAMES):
+        raise Exception('Invalid class name "{}"'.format(classification))
+
+    classIndex = CLASS_NAMES.index(classification)
+    extractor = ImageExtract(img)
+    fullSize = extractor.image.shape[:2]
+    extracted = extractor.extract()
+    lines = []
+
+    for i, e in enumerate(extracted):
+        img, rec, bbox = e
+        center = (rec[0][0] / fullSize[1], rec[0][1] / fullSize[0])
+        x, y, w, h = bbox
+        w /= fullSize[1]
+        h /= fullSize[0]
+        lines.append((classIndex, center, (w, h)))
+
+    return extractor.image, lines

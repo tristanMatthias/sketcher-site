@@ -6,6 +6,9 @@
   "bin": {
     "extract-images": "./parse.py"
   },
+  "scripts": {
+    "start": "pm2 start server.py --name server --interpreter=python3"
+  },
   "dependencies": {
     "execa": "^3.2.0"
   }
