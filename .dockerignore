@@ -1,6 +1,10 @@
+.git
 node_modules
 **/*/node_modules
 pacakges/*/node_modules
 packages/client
+packages/extractor/data
+packages/extractor/input
+packages/extractor/darknet-data
 *.h5
 !pacakges/extractor/model.p5

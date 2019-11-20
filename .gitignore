@@ -1,6 +1,9 @@
 __pycache__
 .vscode
 packages/extractor/data
+packages/extractor/darknet-data
+packages/extractor/input
+packages/extractor/uploads
 node_modules
 **/node_modules
 *.log
