@@ -13,6 +13,16 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import math
 import matplotlib.pyplot as plt
 from settings import IMG_WIDTH, IMG_HEIGHT, CHANNELS, EPOCHS, MODEL_PATH, CLASS_NAMES
+import argparse
+
+
+parser = argparse.ArgumentParser(
+    description='Train model'
+)
+parser.add_argument('epochs', nargs='?', default=EPOCHS)
+args = parser.parse_args()
+epochs = int(args.epochs)
+print('Training for', args.epochs, "epoch")
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -75,7 +85,7 @@ history = model.fit_generator(
     steps_per_epoch=STEP_SIZE_TRAIN,
     validation_data=validation_generator,
     validation_steps=STEP_SIZE_VALDATION,
-    epochs=EPOCHS
+    epochs=epochs
 )
 
 test_loss, test_accuracy = model.evaluate(
@@ -91,7 +101,7 @@ def plot_accuracy():
     loss = history.history['loss']
     val_loss = history.history['val_loss']
 
-    epochs_range = range(EPOCHS)
+    epochs_range = range(epochs)
 
     plt.figure(figsize=(8, 8))
     plt.subplot(1, 2, 1)
