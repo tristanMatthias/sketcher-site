@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-button {
+button, .button {
   display: inline-block;
   $bw: 3px;
   position: relative;
@@ -8,25 +8,35 @@ button {
   border: $bw solid $color-main;
   background: $color-white;
   min-height: 4rem;
+  line-height: 4rem;
   min-width: 4rem;
-  padding: 0;
+  padding: 0 1rem;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.8rem;
   font-family: $ff-main;
+  text-decoration: none;
+  color: $color-main;
+  text-align: center;
+
+  &.large {
+    height: 6rem;
+    line-height: 6rem;
+    font-size: 2.4rem;
+  }
 
   span, svg {
     vertical-align: middle;
   }
   span {
-    margin: 0 2rem 0 1rem;
+    margin: 0 1rem;
   }
 
   svg:not(:only-child) {
-    margin-left: 0.7rem;
+    margin-left: -0.3rem;
   }
-  span:only-child {
-    margin: 0 1rem;
+  svg:only-child {
+    margin: 0 -1rem;
   }
 
   &:after {

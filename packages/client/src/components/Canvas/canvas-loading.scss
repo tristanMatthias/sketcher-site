@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.home-loading {
+.canvas-loading {
   position: fixed;
   display: grid;
   justify-content: center;
@@ -12,6 +12,7 @@
   background: rgba($color-main, 0.7);
   opacity: 0;
   animation: fade-in 0.3s forwards;
+  z-index: 100;
 
   .card {
     margin: 2rem;

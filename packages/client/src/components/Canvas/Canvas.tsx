@@ -1,13 +1,21 @@
 import './canvas.scss';
 
-import React, { MouseEvent, TouchEvent, useEffect, useRef, useState } from 'react';
+import React, { MouseEvent, TouchEvent, useEffect, useRef, useState, useMemo } from 'react';
 
 import { Canvas as CC, CanvasMode } from '../../containers/canvas.container';
 import { Picture } from '../../containers/picture.container';
 import { useResize } from '../../hooks/resize';
+import { CanvasLoading } from './CanvasLoading';
+import { Extract } from '../../containers/extract.container';
 
+export interface CanvasProps {
+  image?: string;
+}
 
-export const Canvas = () => {
+export const Canvas: React.FunctionComponent<CanvasProps> = ({
+  image
+}) => {
+  const { loading } = Extract.useContainer();
   const container = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const [containerBox, setContainerBox] = useState<DOMRect>();
@@ -16,7 +24,8 @@ export const Canvas = () => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const windowSize = useResize();
   const [drawing, setDrawing] = useState(false);
-
+  const [img, setImg] = useState();
+  const [imgDim, setImgDim] = useState();
 
   useEffect(() => {
     if (container.current && canvas.current && windowSize) {
@@ -24,12 +33,26 @@ export const Canvas = () => {
     }
   }, [windowSize, canvas.current, container.current]);
 
+
   useEffect(() => {
     if (containerBox) {
       canvas.current!.width = containerBox.width;
       canvas.current!.height = containerBox.height;
+      render();
     }
   }, [containerBox]);
+
+
+  useMemo(() => {
+    if (image) {
+      const img = new Image();
+      img.src = image;
+      img.onload = () => {
+        setImgDim({ width: img.width, height: img.height });
+        setImg(img);
+      };
+    }
+  }, [image]);
 
 
   useEffect(() => {
@@ -84,7 +107,26 @@ export const Canvas = () => {
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, c.width, c.height);
 
+    // Draw image
+    if (img) {
 
+      let { width, height } = imgDim!;
+
+      // Scale the image if it's too big
+      if (width > c.width) {
+        const scale = width / c.width;
+        width *= 1 / scale;
+        height *= 1 / scale;
+      } else if (height > c.height) {
+        const scale = height / c.height;
+        width *= 1 / scale;
+        height *= 1 / scale;
+      }
+
+      ctx.drawImage(img, c.width / 2 - width / 2, c.height / 2 - height / 2);
+    }
+
+    // Draw user content
     userActions.forEach(points => {
       ctx.beginPath();
       points.forEach(({ x, y }, i) => {
@@ -95,14 +137,16 @@ export const Canvas = () => {
       ctx.stroke();
       ctx.closePath();
     });
+
+
   };
 
-  useEffect(render, [userActions]);
+  useEffect(render, [userActions, img]);
 
 
   const updatePicture = () => {
     if (!canvas.current) return;
-    if (userActions.length === 0 && mode === CanvasMode.drawing) {
+    if (userActions.length === 0 && mode === CanvasMode.drawing && !img) {
       setPicture(undefined);
       return;
     }
@@ -128,7 +172,7 @@ export const Canvas = () => {
 
     setPicture(new Blob([ab], { type: mimeString }));
   };
-  useEffect(updatePicture, [userActions.length]);
+  useEffect(updatePicture, [userActions.length, img]);
 
 
   return <div ref={container} className="canvas">
@@ -163,6 +207,7 @@ export const Canvas = () => {
         <video ref={video} />
       </>
     }
+    {loading && <CanvasLoading />}
 
   </div>;
 };

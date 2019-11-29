@@ -2,6 +2,8 @@
 
 .modal {
   aside.help {
+    padding-bottom: 4rem;
+
     main {
       max-width: 60rem;
       margin: auto;
@@ -33,6 +35,12 @@
       img {
         width: 100%;
       }
+
+    }
+    .button {
+      display: block;
+      width: 100%;
+      margin-top: 4rem;
     }
   }
 }

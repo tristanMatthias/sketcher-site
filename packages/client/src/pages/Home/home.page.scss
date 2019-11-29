@@ -1,8 +1,12 @@
 @import '../../styles/variables.scss';
 
 main.home {
-  display: grid;
-  grid-template-rows: 8rem 1fr 8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
   align-items: center;
   user-select: none;
 }

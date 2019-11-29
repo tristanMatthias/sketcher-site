@@ -6,15 +6,22 @@ import logo from '../../images/logo.svg';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 import { HelpModal } from '../../modals/Help/Help.modal';
+import { Link } from 'react-router-dom';
+import { routes } from '../../router/routes';
 
 export const Header = () => {
   const [helpModal, setHelpModal] = useState(false);
 
   return <header className="page-header">
-    <img src={logo} alt="SketchSite" />
+    <Link to={routes.home()}>
+      <img src={logo} alt="SketchSite" />
+    </Link>
+
     <Button onClick={() => setHelpModal(!helpModal)}>
       <Icon type="help" />
     </Button>
+
     {helpModal && <HelpModal onClose={() => setHelpModal(false)} />}
+
   </header>;
 };

@@ -21,7 +21,10 @@ class ImageExtract():
             self.image = self.__svg2png(filename)
         else:
             self.image = cv2.imread(filename=filename)
-        self.gray = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
+        try:
+            self.gray = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
+        except:
+            print("SHIT", filename)
         self.canvas = self.image.copy()
         self.blur = cv2.GaussianBlur(src=self.gray, ksize=(5, 5), sigmaX=0)
 

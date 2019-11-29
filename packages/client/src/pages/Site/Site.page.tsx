@@ -32,7 +32,7 @@ export const SitePage: React.FunctionComponent<{ site: string }> = ({
         case 'circle_image':
           return <img src={'http://placehold.it/100x100'} style={{ borderRadius: '50%' }} />;
         case 'button':
-          return <Button {...props}><span>Some text</span></Button>;
+          return <Button {...props}><span>Some button</span></Button>;
         case 'text':
           return <span {...props}>Lorem ipsum dolor sit amet.&nbsp;</span>;
         case 'select':

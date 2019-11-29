@@ -36,7 +36,7 @@ export class Modal extends Component<ModalProps> {
         </div>
       </header>
 
-      <main> {this.props.children} </main>
+      <div className="content"> {this.props.children} </div>
 
       {this.props.footerButtons &&
         <footer>

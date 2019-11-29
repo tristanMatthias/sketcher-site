@@ -7,7 +7,7 @@ main.site {
   margin: auto;
   position: relative;
 
-  * {
+  & > * {
     display: block;
     margin-bottom: 2rem;
   }

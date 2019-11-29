@@ -8,15 +8,22 @@ export const ExtractService = new class {
   async extract(input: ExtractInput) {
 
     const img = await (await input.image).createReadStream();
-    const { path, cleanup } = await file();
+    const { path } = await file();
 
-    fs.writeFileSync(path, img);
+    await new Promise(res => {
+      fs.writeFile(path, img, () => {
+        // Wait for FS to catchup
+        setTimeout(res, 10);
+      });
+    });
 
     const fileStream = fs.createWriteStream(path);
     img.pipe(fileStream);
 
 
-    const res = await fetch('http://localhost:8080/parse', {
+    // const res = await new Promise((res) => {
+    //   setTimeout(async () => {
+    const res = await fetch('http://localhost:5555/parse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,7 +33,7 @@ export const ExtractService = new class {
       })
     });
 
-    cleanup();
+    // cleanup();
 
     return await res.json();
   }

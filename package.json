@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "start": "lerna run start"
+    "start": "forever start packages/api/dist; forever start -c python packages/extractor/server.py"
   },
   "workspaces": [
     "packages/*"
@@ -17,6 +17,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
+    "concurrently": "^5.0.0",
     "pm2": "^4.1.2"
   }
 }

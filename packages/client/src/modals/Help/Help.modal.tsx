@@ -2,14 +2,16 @@ import './help.modal.scss';
 
 import React from 'react';
 
+import { LinkButton } from '../../components/Button/LinkButton';
 import { Modal } from '../../components/Modal/Modal';
 import { ModalProps } from '../../components/Modal/modal.types';
 import exampleButton from '../../images/help/examples/button.svg';
-import exampleImage from '../../images/help/examples/image.svg';
 import exampleCircleImage from '../../images/help/examples/circle-image.svg';
-import exampleText from '../../images/help/examples/text.svg';
+import exampleImage from '../../images/help/examples/image.svg';
 import exampleInput from '../../images/help/examples/input.svg';
 import exampleSelect from '../../images/help/examples/select.svg';
+import exampleText from '../../images/help/examples/text.svg';
+import { routes } from '../../router/routes';
 
 
 export const HelpModal: React.FunctionComponent<Partial<ModalProps>> = props => {
@@ -29,6 +31,12 @@ export const HelpModal: React.FunctionComponent<Partial<ModalProps>> = props => 
         <div>{label}</div>
       </div>)}
     </div>
+    <LinkButton
+      type="submit"
+      size="large"
+      onClick={props.onClose}
+      to={routes.examples()}
+    >See examples</LinkButton>
   </Modal>;
 };
 

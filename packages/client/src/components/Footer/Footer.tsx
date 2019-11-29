@@ -8,7 +8,13 @@ import { Picture } from '../../containers/picture.container';
 import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 
-export const Footer = () => {
+export interface FooterProps {
+  centerButton?: boolean;
+}
+
+export const Footer: React.FunctionComponent<FooterProps> = ({
+  centerButton = true
+}) => {
   const { undo, clear, userActions, cameraClick } = CC.useContainer();
   const { picture } = Picture.useContainer();
 
@@ -28,13 +34,13 @@ export const Footer = () => {
         </>}
     </div>
 
-    <Button
+    {centerButton && <Button
       className="camera"
       onClick={cameraClick}
       circle
     >
       <Icon type="camera" size="large" />
-    </Button>
+    </Button>}
 
 
     <div>

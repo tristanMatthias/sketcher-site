@@ -47,7 +47,7 @@
   }
 
 
-  header, main, footer {
+  header, .content, footer {
     position: relative;
     z-index: 2;
   }
@@ -74,7 +74,7 @@
     }
   }
 
-  main {
+  .content {
     padding: 2rem var(--padding);
   }
 
