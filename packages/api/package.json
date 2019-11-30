@@ -9,7 +9,7 @@
   "scripts": {
     "types": "node dist/lib/generateTypes.js gqlg --schemaFilePath dist/schema.gql",
     "build": "tsc -p ./; yarn types",
-    "start": "pm2 start ./dist",
+    "start": "nodemon ./dist",
     "dev": "tsc -p ./ -w & nodemon dist/"
   },
   "devDependencies": {
