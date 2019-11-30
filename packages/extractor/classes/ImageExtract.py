@@ -3,6 +3,7 @@ import imutils
 import numpy as np
 from cairosvg import svg2png
 from PIL import Image
+import matplotlib.pyplot as plt
 
 import os
 
@@ -21,10 +22,17 @@ class ImageExtract():
             self.image = self.__svg2png(filename)
         else:
             self.image = cv2.imread(filename=filename)
-        try:
-            self.gray = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
-        except:
-            print("SHIT", filename)
+
+        # Trim white pixels
+        gray = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
+        invert = cv2.findNonZero(255*(gray < 128).astype(np.uint8))
+        x, y, w, h = cv2.boundingRect(invert)
+        padding = 1
+
+        # Resize image
+        self.image = self.image[y - padding: y +
+                                h + padding, x - padding: x+w + padding]
+        self.gray = cv2.cvtColor(src=self.image, code=cv2.COLOR_BGR2GRAY)
         self.canvas = self.image.copy()
         self.blur = cv2.GaussianBlur(src=self.gray, ksize=(5, 5), sigmaX=0)
 

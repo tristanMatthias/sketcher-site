@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { file } from 'tmp-promise';
 import fetch from 'node-fetch';
+import { file } from 'tmp-promise';
 
 import { ExtractInput } from '../gql/entities/ExtractEntity';
 
@@ -8,7 +8,7 @@ export const ExtractService = new class {
   async extract(input: ExtractInput) {
 
     const img = await (await input.image).createReadStream();
-    const { path } = await file();
+    const { path, cleanup } = await file();
 
     await new Promise(res => {
       fs.writeFile(path, img, () => {
@@ -21,8 +21,6 @@ export const ExtractService = new class {
     img.pipe(fileStream);
 
 
-    // const res = await new Promise((res) => {
-    //   setTimeout(async () => {
     const res = await fetch('http://localhost:5555/parse', {
       method: 'POST',
       headers: {
@@ -33,7 +31,7 @@ export const ExtractService = new class {
       })
     });
 
-    // cleanup();
+    cleanup();
 
     return await res.json();
   }

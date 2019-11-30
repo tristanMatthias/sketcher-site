@@ -27,7 +27,9 @@ const useExtract = () => {
   useEffect(() => {
     if (data) {
       setComponents(data.extract);
-      const siteString = btoa(`v1,${data.extract.map(c => c.component).join(',')}`);
+      const siteString = btoa(`v1,${data.extract.map(c =>
+        `${c.component}:${c.box.x}:${c.box.w}`
+      ).join(',')}`);
       clear();
       history.push(`/s/${siteString}`);
     }
@@ -36,16 +38,20 @@ const useExtract = () => {
   const decodeSiteString = (site: string) => {
     const decoded = atob(site);
     const [, ...components] = decoded.split(',');
-    setComponents(components.map(c => ({
-      component: c,
-      center: [0, 0],
-      box: {
-        w: 0,
-        h: 0,
-        x: 0,
-        y: 0
+    setComponents(components.map(c => {
+      const [, type, x, w] = /(\w+):(\d+):(\d+)$/.exec(c)!;
+
+      return {
+        component: type,
+        center: [0, 0],
+        box: {
+          w: parseInt(w),
+          h: 0,
+          x: parseInt(x),
+          y: 0
+        }
       }
-    })));
+    }));
   };
 
   return {

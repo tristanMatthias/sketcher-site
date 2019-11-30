@@ -6,13 +6,18 @@ main.site .content {
   max-width: 60rem;
   margin: auto;
   position: relative;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(12, 1fr);
 
-  & > * {
-    display: block;
-    margin-bottom: 2rem;
-  }
   button {
     margin-bottom: 2.5rem;
     margin-left: 0;
+  }
+
+  span.text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

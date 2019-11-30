@@ -4,9 +4,9 @@ from lib.square_image import square_image
 from settings import IMG_WIDTH, MODEL_PATH, CLASS_NAMES
 import numpy as np
 import tensorflow as tf
-from keras import np_utils
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+COLS = 12
 
 
 def parse(img):
@@ -31,18 +31,19 @@ def parse(img):
     images = list(map(prepare_img, images))
 
     model = tf.keras.models.load_model(MODEL_PATH)
-    y_proba = model.predict(images)
-    y_classes = np_utils.probas_to_classes(y_proba)
-    print(y_proba)
     predictions = list(map(lambda i: model.predict_classes(i)[0], images))
     predictions = list(map(lambda p: CLASS_NAMES[p], predictions))
 
     data = []
+    height, width, _ = extractor.image.shape
+    colSize = round(width / COLS)
 
     for i, e in enumerate(extracted):
         img, rec, bbox = e
         center = rec[0]
         x, y, w, h = bbox
+        x = round(x/width * COLS)
+        w = round(w/width * COLS)
 
         data.append({
             "component": predictions[i],
