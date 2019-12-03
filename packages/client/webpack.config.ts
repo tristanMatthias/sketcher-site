@@ -4,6 +4,8 @@ import Copy from 'copy-webpack-plugin';
 import ExtractText from 'extract-text-webpack-plugin';
 import HTMLWebpack from 'html-webpack-plugin';
 import { Configuration } from 'webpack';
+import ip from 'ip';
+
 
 const favicon = require('favicons-webpack-plugin');
 const replacePlugin = require('webpack-plugin-replace');
@@ -70,7 +72,7 @@ const config: Configuration = {
     ]),
     new replacePlugin({
       values: {
-        '{{API_HOST}}': isProd ? 'https://api.sketcher.site' : 'http://localhost:4000',
+        '{{API_HOST}}': isProd ? 'https://api.sketcher.site' : `http://${ip.address()}:4000`,
         '{{IS_PROD}}': isProd
       }
     })
