@@ -3,9 +3,14 @@
 main.examples {
   .content {
     margin: auto;
-    margin-top: 6rem;
+    margin-top: 4rem;
+    @media (min-width: 600px) {
+      margin-top: 6rem;
+    }
     max-width: 60rem;
     width: 100%;
+    padding: 4rem;
+    padding-top: 0;
   }
 
   .grid {

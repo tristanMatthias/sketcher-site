@@ -10,10 +10,12 @@ html {
   font-family: "Space Grotesk";
   font-size: 10px;
   user-select: none;
+  height: 100vh;
+  overflow: hidden;
 }
 
-html, body, #app {
-  min-height: 100%;
+body, #app {
+  height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
 }
 
