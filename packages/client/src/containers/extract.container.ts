@@ -25,7 +25,7 @@ const useExtract = () => {
   };
 
   useEffect(() => {
-    if (data) {
+    if (data && data.extract) {
       setComponents(data.extract);
       const siteString = btoa(`v1,${data.extract.map(c =>
         `${c.component}:${c.box.x}:${c.box.w}`

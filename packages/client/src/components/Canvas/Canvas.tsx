@@ -7,6 +7,7 @@ import { Picture } from '../../containers/picture.container';
 import { useResize } from '../../hooks/resize';
 import { CanvasLoading } from './CanvasLoading';
 import { Extract } from '../../containers/extract.container';
+import { useDisableZoom } from '../../lib/disableZoom';
 
 export interface CanvasProps {
   image?: string;
@@ -15,6 +16,7 @@ export interface CanvasProps {
 export const Canvas: React.FunctionComponent<CanvasProps> = ({
   image
 }) => {
+  useDisableZoom();
   const { loading } = Extract.useContainer();
   const container = useRef<HTMLDivElement>(null);
   const video = useRef<HTMLVideoElement>(null);
@@ -107,6 +109,35 @@ export const Canvas: React.FunctionComponent<CanvasProps> = ({
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, c.width, c.height);
 
+    const gridSize = 30;
+    const gXnum = Math.ceil(c.width / gridSize);
+    const gYnum = Math.ceil(c.width / gridSize) + 4;
+
+    const gXoffset = (c.width - (gXnum * gridSize)) / 2;
+    const gYoffset = (c.height - (gYnum * gridSize)) / 2;
+
+
+    for (let i = 0; i < gYnum; i += 1) {
+      const y = i * gridSize + gYoffset;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(c.width, y);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#ddd';
+      ctx.stroke();
+      ctx.closePath();
+    }
+    for (let i = 0; i < gXnum; i += 1) {
+      const x = i * gridSize + gXoffset;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, c.height);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#ddd';
+      ctx.stroke();
+      ctx.closePath();
+    }
+
     // Draw image
     if (img) {
 
@@ -134,6 +165,7 @@ export const Canvas: React.FunctionComponent<CanvasProps> = ({
         else ctx.lineTo(x, y);
       });
       ctx.lineWidth = 3;
+      ctx.strokeStyle = 'black';
       ctx.stroke();
       ctx.closePath();
     });
@@ -174,14 +206,9 @@ export const Canvas: React.FunctionComponent<CanvasProps> = ({
   };
   useEffect(updatePicture, [userActions.length, img]);
 
-
   return <div ref={container} className="canvas">
     {mode === CanvasMode.drawing
       ? <>
-        {userActions.length === 0 && <span className="empty">
-          Draw something <small>or</small> Take a photo
-        </span>}
-
         <canvas
           ref={canvas}
           onTouchStart={pushAction}
@@ -198,6 +225,9 @@ export const Canvas: React.FunctionComponent<CanvasProps> = ({
           }}
           onMouseMove={drawMouse}
         ></canvas>
+        {userActions.length === 0 && !img && <span className="empty">
+          Draw something <small>or</small> Take a photo
+        </span>}
       </>
       : <>
         <canvas ref={canvas} />

@@ -10,7 +10,7 @@ import ReactDOM from 'react-dom';
 import { ContainerWrapper } from './containers/Wrapper';
 import { client } from './lib/apollo';
 import { AppRouter } from './router/AppRouter';
-import './lib/disableZoom';
+import './lib/heightFix';
 
 ReactDOM.render(
   <ApolloProvider client={client}>
