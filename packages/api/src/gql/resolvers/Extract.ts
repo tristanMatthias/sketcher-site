@@ -7,7 +7,7 @@ import { EExtract, ExtractInput } from '../entities/ExtractEntity';
 @Resolver(EExtract)
 export class ExtractResolver {
 
-  @Query(() => [EExtract])
+  @Query(() => [EExtract], { nullable: true })
   async extract(
     @Arg('extract') extract: ExtractInput
   ) {

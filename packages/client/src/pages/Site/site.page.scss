@@ -1,6 +1,7 @@
 @import '../../styles/variables.scss';
 
 main.site .content {
+  --cols: 6;
   padding: 2rem;
   width: 80%;
   max-width: 60rem;
@@ -8,7 +9,7 @@ main.site .content {
   position: relative;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(var(--cols), 1fr);
 
   button {
     margin-bottom: 2.5rem;
@@ -19,5 +20,8 @@ main.site .content {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+  img {
+    width: 100%;
   }
 }

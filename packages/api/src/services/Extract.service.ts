@@ -20,19 +20,24 @@ export const ExtractService = new class {
     const fileStream = fs.createWriteStream(path);
     img.pipe(fileStream);
 
+    let comps;
+    try {
+      const res = await fetch('http://localhost:5555/parse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          file: path
+        })
+      });
 
-    const res = await fetch('http://localhost:5555/parse', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        file: path
-      })
-    });
+      comps = await res.json();
+    } catch (e) {
+      comps = null;
+    }
 
-    cleanup();
-
-    return await res.json();
+    await cleanup();
+    return comps;
   }
 }();

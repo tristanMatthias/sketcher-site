@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-COLS = 12
+COLS = 6
 
 
 def parse(img):

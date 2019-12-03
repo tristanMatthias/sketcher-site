@@ -6,6 +6,7 @@ import { Button } from '../../components/Button/Button';
 import { Page } from '../../components/Page/Page';
 import { Select } from '../../components/Select/Select';
 import { Extract } from '../../containers/extract.container';
+import { ImagePlaceholder } from '../../components/ImagePlaceholder/ImagePlaceholder';
 
 export const SitePage: React.FunctionComponent<{ site: string }> = ({
   site
@@ -29,10 +30,8 @@ export const SitePage: React.FunctionComponent<{ site: string }> = ({
           case 'input':
             return <input {...props} />;
           case 'image':
-            const w = Math.round(c.box.w / 12 * 600);
-            style.width = w;
-            style.height = w;
-            return <img src={`http://placehold.it/${w}x${w}`} {...props} />;
+            style.paddingBottom = `50%`;
+            return <ImagePlaceholder style={{ paddingBottom: '50%', ...style }} />;
 
           case 'circle_image':
             return <img src={'http://placehold.it/100x100'} style={{ borderRadius: '50%', ...props }} />;
