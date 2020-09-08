@@ -1,0 +1,7 @@
+opencv-python
+imutils
+cairosvg
+matplotlib
+cherrypy
+cherrypy_cors
+tensorflow
