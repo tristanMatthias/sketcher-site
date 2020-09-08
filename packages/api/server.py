@@ -10,7 +10,7 @@ cherrypy_cors.install()
 config = {
     'global': {
         'server.socket_host': '0.0.0.0',
-        'server.socket_port': os.environ.get('PORT') or 5000,
+        'server.socket_port': int(os.environ.get('PORT')) or 5000,
         'cors.expose.on': True,
     }
 }
