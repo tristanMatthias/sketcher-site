@@ -1,4 +1,5 @@
 __pycache__
 data/
 *.h5
+!model.h5
 uploads/
