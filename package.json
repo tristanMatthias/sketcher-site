@@ -1,4 +1,7 @@
 {
   "name": "sketcher-site",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "scripts": {
+    "build": "cd packages/client; yarn build"
+  }
 }
