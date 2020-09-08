@@ -21,7 +21,12 @@ export default {
               // %%HASH%% replace with git hash
               ["search-and-replace", {
                 "rules": [
-                  { "search": "%%API%%", "replace": 'http://localhost:5000' }
+                  {
+                    "search": "%%API%%",
+                    "replace": process.env.NODE_ENV === 'production'
+                      ? 'https://api.sketcher.site'
+                      : 'http://localhost:5000'
+                  }
                 ]
               }]
             ]
