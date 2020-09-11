@@ -3,3 +3,4 @@ data/
 *.h5
 !model.h5
 uploads/
+tfjs_model
