@@ -19,7 +19,7 @@
     "@types/styled-components": "^5.1.2",
     "@types/webpack-bundle-analyzer": "^3.8.0",
     "@types/webpack-dev-server": "^3.11.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "babel-plugin-search-and-replace": "^1.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
